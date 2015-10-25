@@ -83,7 +83,7 @@ class BinarySearchTree
   end
 
   def depth_of
-
+    root.depth
   end
 
 end
@@ -102,6 +102,14 @@ class Node # Needs to know that a new link has been created and to which Node.
 
   def to_a
     linked_left.to_a + [@data] + linked_right.to_a
+  end
+
+  def depth
+    case linked_left.depth <=> linked_right.depth
+      when -1 then (1 + linked_right.depth)
+      when 0 then (1 + linked_right.depth)
+      when 1 then (1 + linked_left.depth)
+    end
   end
 
   def linked_left?

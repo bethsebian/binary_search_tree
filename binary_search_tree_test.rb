@@ -143,17 +143,8 @@ class BinarySearchTreeTest < Minitest::Test
   end
 
   def test_it_reports_the_depth_of_a_tree
-    skip
     list.insert(8)
-    list.insert(5)
-    list.insert(14)
-    list.insert(3)
-    list.insert(16)
-    list.insert(7)
-    list.insert(19)
-    assert_equal 3, list.depth_of
+    assert_equal 0, list.depth_of
   end
-
-
 
 end
