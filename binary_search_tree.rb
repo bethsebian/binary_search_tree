@@ -42,6 +42,42 @@ class BinarySearchTree # Describes the list
       end
     end
   end
+
+  def include?(data)
+    current = root
+    if current.data.nil?
+      false
+    elsif data == current.data
+      true
+    else
+      while data != current.data
+        if data < current.data
+          if current.linked_left.nil?
+            result = false
+            break
+          else current = current.linked_left
+            if data == current.data
+              result = true                   # WORKS
+            else
+              redo
+            end
+          end
+        else data > current.data
+          if current.linked_right.nil?
+            result = false                    # ?
+            break
+          else current = current.linked_right
+            if data == current.data
+              result = true
+            else
+              redo
+            end
+          end
+        end
+      end
+      result
+    end
+  end
 end
 
 class Node # Needs to know that a new link has been created and to which Node.

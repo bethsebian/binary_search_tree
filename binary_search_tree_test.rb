@@ -57,6 +57,51 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal 7, list.root.linked_left.linked_right.data
   end
 
-  # ToDo: INCLUDE? is a value present in this list?
+  def test_it_can_verify_the_presence_of_an_element_in_the_root_node
+    list.push(8)
+    list.push(14)
+    list.push(5)
+    assert list.include?(8)
+  end
+
+  def test_it_can_refute_the_presence_of_an_element_in_the_root_node
+    list.push(8)
+    refute list.include?(14)
+  end
+
+  def test_it_can_verify_the_presence_of_an_element_in_tree_with_depth_of_one
+    list.push(8)
+    list.push(5)
+    list.push(12)
+    assert list.include?(5)
+    assert list.include?(12)
+    assert list.include?(8)
+  end
+
+  def test_it_can_verify_the_presence_of_an_element_in_tree_with_depth_of_two
+    list.push(8)
+    list.push(5)
+    list.push(14)
+    list.push(3)
+    list.push(16)
+    list.push(7)
+    list.push(19)
+    assert list.include?(8)
+    assert list.include?(5)
+    assert list.include?(14)
+    assert list.include?(3)
+    assert list.include?(16)
+    assert list.include?(7)
+    assert list.include?(19)
+    refute list.include?(1)
+    refute list.include?(4)
+    refute list.include?(17)
+    refute list.include?(21)
+    refute list.include?(200)
+  end
+
+
+
+
 
 end
