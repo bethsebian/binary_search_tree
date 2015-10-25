@@ -77,6 +77,15 @@ class BinarySearchTree
     end
     current.data
   end
+
+  def to_a
+    root.to_a
+  end
+
+  def depth_of
+
+  end
+
 end
 
 class Node # Needs to know that a new link has been created and to which Node.
@@ -89,6 +98,10 @@ class Node # Needs to know that a new link has been created and to which Node.
 
   def linked_right?
     linked_right
+  end
+
+  def to_a
+    linked_left.to_a + [@data] + linked_right.to_a
   end
 
   def linked_left?
