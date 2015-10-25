@@ -142,9 +142,28 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal [], list.to_a
   end
 
-  def test_it_reports_the_depth_of_a_tree
+  def test_it_reports_the_max_depth_of_a_tree_with_6_levels
     list.insert(8)
-    assert_equal 0, list.depth_of
+    list.insert(14)
+    list.insert(16)
+    list.insert(19)
+    list.insert(20)
+    list.insert(21)
+    assert_equal 6, list.max_depth
   end
 
+  def test_it_reports_the_max_depth_of_a_tree_with_4_levels
+    list.insert(8)
+    list.insert(14)
+    list.insert(12)
+    list.insert(19)
+    list.insert(18)
+    list.insert(21)
+    assert_equal 4, list.max_depth
+  end
+
+  def test_it_reports_the_max_depth_of_a_tree_with_1_level
+    list.insert(8)
+    assert_equal 1, list.max_depth
+  end
 end

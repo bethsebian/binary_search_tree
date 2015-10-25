@@ -82,8 +82,8 @@ class BinarySearchTree
     root.to_a
   end
 
-  def depth_of
-    root.depth
+  def max_depth
+    root.max_depth
   end
 
 end
@@ -104,11 +104,14 @@ class Node # Needs to know that a new link has been created and to which Node.
     linked_left.to_a + [@data] + linked_right.to_a
   end
 
-  def depth
-    case linked_left.depth <=> linked_right.depth
-      when -1 then (1 + linked_right.depth)
-      when 0 then (1 + linked_right.depth)
-      when 1 then (1 + linked_left.depth)
+  def max_depth
+    # need variable because I can't call my method on nil?
+    left_depth = linked_left ? linked_left.max_depth : 0
+    right_depth = linked_right ? linked_right.max_depth : 0
+    case left_depth <=> right_depth
+      when -1 then (1 + right_depth)
+      when 0 then (1 + right_depth)
+      when 1 then (1 + left_depth)
     end
   end
 
