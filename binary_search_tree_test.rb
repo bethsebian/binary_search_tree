@@ -133,6 +133,14 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal [3,5,7,8,14,16,19], list.to_a
   end
 
+  def test_it_implements_a_sort_that_outputs_an_array_of_values_in_sorted_order
+    list.insert(8)
+    assert_equal [8], list.to_a
+  end
+
+  def test_it_implements_a_sort_that_outputs_an_array_of_values_in_sorted_order
+    assert_equal [], list.to_a
+  end
 
   def test_it_reports_the_depth_of_a_tree
     skip
