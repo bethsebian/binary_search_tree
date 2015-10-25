@@ -1,28 +1,11 @@
 require 'pry'
+require_relative 'helper'
 
-class BinarySearchTree # Describes the list
+class BinarySearchTree
+  include Helper # Describes the list
   attr_reader :root
 
-  def count
-    if root.nil?
-      0
-    else
-      current = root
-      count = 1
-      # This won't work for trees with multiple levels of branching.
-      while current.linked_right
-        count += 1
-        current = current.linked_right
-      end
-      while current.linked_left
-        count += 1
-        current = current.linked_left
-      end
-      count
-    end
-  end
-
-  def push(data)
+  def insert(data)
     if root.nil?
       @root = Node.new(data)
     else
@@ -77,6 +60,22 @@ class BinarySearchTree # Describes the list
       end
       result
     end
+  end
+
+  def max_value
+    current = root
+    while current.linked_right
+      current = current.linked_right
+    end
+    current.data
+  end
+
+  def min_value
+    current = root
+    while current.linked_left
+      current = current.linked_left
+    end
+    current.data
   end
 end
 
