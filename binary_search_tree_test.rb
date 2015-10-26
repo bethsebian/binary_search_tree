@@ -166,4 +166,87 @@ class BinarySearchTreeTest < Minitest::Test
     list.insert(8)
     assert_equal 1, list.max_depth
   end
+
+  def test_it_reports_the_depth_of_a_node
+    list.insert(8)
+    list.insert(14)
+    list.insert(16)
+    list.insert(19)
+    assert_equal 4, list.depth_of(19)
+  end
+
+  def test_it_reports_the_depth_of_a_node_2
+    list.insert(8)
+    list.insert(14)
+    list.insert(16)
+    list.insert(19)
+    assert_equal 3, list.depth_of(16)
+  end
+
+  def test_it_reports_the_depth_of_a_node_2
+    list.insert(8)
+    list.insert(5)
+    list.insert(14)
+    list.insert(3)
+    list.insert(16)
+    list.insert(7)
+    list.insert(19)
+    list.insert(20)
+    list.insert(2)
+    assert_equal 1, list.depth_of(8)
+    assert_equal 2, list.depth_of(5)
+    assert_equal 2, list.depth_of(14)
+    assert_equal 3, list.depth_of(3)
+    assert_equal 3, list.depth_of(16)
+    assert_equal 3, list.depth_of(7)
+    assert_equal 4, list.depth_of(19)
+    assert_equal 5, list.depth_of(20)
+    assert_equal 4, list.depth_of(2)
+  end
+
+  # def reorient_if_applicable(data)
+  # end
+  #
+  def test_it_moves_to_appropriate_next_linked_node
+    skip
+    root = Node.new(8)
+    root.linked_right = Node.new(15)
+    root.linked_left = Node.new(6)
+    root.linked_right.linked_right = Node.new(17)
+    root.linked_right.linked_left = Node.new(11)
+    assert_equal root.linked_right.linked_left.data, root.reorient_if_applicable(10)
+    assert_equal root.linked_left.data, root.reorient_if_applicable(4).data
+  end
+
+  def test_it_stays_on_original_node_if_no_link_exists
+    skip
+    root = Node.new(8)
+    assert_equal root, root.reorient_if_applicable(11)
+    assert_equal root, root.reorient_if_applicable(4)
+  end
+
+  def test_it_adds_a_link_to_node_depending_on_relation_to_node
+    root = Node.new(8)
+    root.add(5)
+    assert root.linked_left
+    refute root.linked_right
+  end
+
+  def test_parent_node_creates_new_link_when_appropriate
+    root = Node.new(8)
+    root.insert_node(15)
+    assert root.linked_right
+    refute root.linked_left
+  end
+
+  def test_parent_node_passes_message_to_children
+    skip
+    root = Node.new(8)
+    root.linked_right = Node.new(15)
+    root.insert_node(21)
+    assert root.linked_right
+    assert_equal 0, root.linked_right.linked_right
+    refute root.linked_left
+  end
+
 end

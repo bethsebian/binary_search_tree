@@ -1,8 +1,7 @@
 require 'pry'
-require_relative 'helper'
+require_relative 'node'
 
 class BinarySearchTree
-  include Helper # Describes the list
   attr_reader :root
 
   def insert(data)
@@ -62,6 +61,25 @@ class BinarySearchTree
     end
   end
 
+  def count # THIS ONLY PARTIALLY WORKS
+    if root.nil?
+      0
+    else
+      current = root
+      count = 1
+      # This won't work for trees with multiple levels of branching.
+      while current.linked_right
+        count += 1
+        current = current.linked_right
+      end
+      while current.linked_left
+        count += 1
+        current = current.linked_left
+      end
+      count
+    end
+  end
+
   def max_value
     current = root
     while current.linked_right
@@ -86,36 +104,18 @@ class BinarySearchTree
     root.max_depth
   end
 
-end
-
-class Node # Needs to know that a new link has been created and to which Node.
-  attr_accessor :linked_right, :linked_left
-  attr_reader :data
-
-  def initialize(input_data)
-    @data = input_data
-  end
-
-  def linked_right?
-    linked_right
-  end
-
-  def to_a
-    linked_left.to_a + [@data] + linked_right.to_a
-  end
-
-  def max_depth
-    # need variable because I can't call my method on nil?
-    left_depth = linked_left ? linked_left.max_depth : 0
-    right_depth = linked_right ? linked_right.max_depth : 0
-    case left_depth <=> right_depth
-      when -1 then (1 + right_depth)
-      when 0 then (1 + right_depth)
-      when 1 then (1 + left_depth)
+  def depth_of(data)
+    current = root
+    depth = 1
+    while data != current.data
+      case data <=> current.data
+      when 1 then depth += 1
+        current = current.linked_right
+      when -1 then depth += 1
+        current = current.linked_left
+      end
     end
-  end
-
-  def linked_left?
-    linked_left
+    depth
   end
 end
+
